@@ -29,8 +29,7 @@ vector<TableRow> readTable(const string& filename, int keyColumn) {
 
     while (getline(file, line)) {
         lineNum++;
-        if (line.empty()) continue; // Пропускаем пустые строки
-
+        if (line.empty()) continue; 
         TableRow row;
         stringstream ss(line);
         string value;
@@ -78,12 +77,12 @@ vector<vector<string>> mergeJoin(vector<TableRow>& table1, vector<TableRow>& tab
 
             vector<string> joinedRow;
 
-            // Добавляем все значения из первой таблицы
+            
             for (const auto& val : table1[i].values) {
                 joinedRow.push_back(val);
             }
 
-            // Добавляем все значения из второй таблицы
+            
             for (size_t k = 1; k < table2[j].values.size(); k++) {
                 joinedRow.push_back(table2[j].values[k]);
             }
@@ -158,7 +157,6 @@ int main() {
     vector<vector<string>> result = mergeJoin(table1, table2);
     cout << "Найдено " << result.size() << " совпадений" << endl;
   //  printResult(result, outputFile);
-    // Спрашиваем куда выводить результат
     cout <<endl<< "Куда вывести результат?" << endl;
     cout << "1 - в файл result.txt" << endl;
     cout << "2 - на экран" << endl;
@@ -166,15 +164,11 @@ int main() {
     cin >> choice;
 
     if (choice == 1) {
-        // Вывод в файл
         printResult(result, "result.txt");
         cout << "Результат сохранен в result.txt" << endl;
     }
     else {
-        // Вывод на экран
         printResult(result, "");
-
-        // Спрашиваем о сохранении в файл
         cout <<endl<< "Хотите сохранить результат в файл?" << endl;
         cout << "1 - да" << endl;
         cout << "2 - нет" << endl;
@@ -190,4 +184,5 @@ int main() {
         }
     }
     return 0;
+
 }
