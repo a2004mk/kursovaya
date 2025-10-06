@@ -3,8 +3,14 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <conio.h>
 #include <algorithm>
 #include <windows.h>
+
+#define COLOR_RESET   "\033[0m"
+#define COLOR_RED     "\033[1;31m"
+#define COLOR_GREEN   "\033[1;32m"
+#define COLOR_GRAY    "\033[2;37m"
 
 using namespace std;
 
@@ -15,12 +21,12 @@ struct TableRow {
 };
 
 // Функция чтения таблицы из txt файла
-vector<TableRow> readTable(const string& filename, int keyColumn) {
+vector<TableRow> readTable(string filename, int keyColumn) {
     vector<TableRow> table;
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cout << "Ошибка: не могу открыть файл " << filename << endl;
+        cout <<COLOR_RED<< "Ошибка: не могу открыть файл " << filename <<COLOR_RESET<< endl;
         return table;
     }
 
@@ -30,6 +36,7 @@ vector<TableRow> readTable(const string& filename, int keyColumn) {
     while (getline(file, line)) {
         lineNum++;
         if (line.empty()) continue; 
+
         TableRow row;
         stringstream ss(line);
         string value;
@@ -42,7 +49,7 @@ vector<TableRow> readTable(const string& filename, int keyColumn) {
             row.key = row.values[keyColumn];
         }
         else {
-            cout << "Предупреждение: в строке " << lineNum << " нет колонки " << keyColumn << endl;
+            cout << "Предупреждение: в строке " << COLOR_GREEN << lineNum  <<COLOR_RESET<<  " нет колонки "<<COLOR_GREEN << keyColumn << COLOR_RESET << endl;
             row.key = "";
         }
 
@@ -50,40 +57,33 @@ vector<TableRow> readTable(const string& filename, int keyColumn) {
     }
 
     file.close();
-    cout << "Прочитано " << table.size() << " строк из " << filename << endl;
+    cout << "Прочитано " << COLOR_GREEN << table.size()<<COLOR_RESET << " строк из " <<COLOR_GREEN<< filename<<COLOR_RESET << endl;
     return table;
 }
 
 // Функция сравнения для сортировки
-bool compareRows(const TableRow& a, const TableRow& b) {
+bool compareRows(TableRow a, TableRow b) {
     return a.key < b.key;
 }
 
 // Функция соединения таблиц
-vector<vector<string>> mergeJoin(vector<TableRow>& table1, vector<TableRow>& table2) { // внешний вектор - таблица (все строки результата), внутренний вектор - одна строка (все ячейки строки), string -  одна ячейка данных
+vector<vector<string>> mergeJoin(vector<TableRow> table1, vector<TableRow> table2) {
     vector<vector<string>> result;
 
-    // Сортируем таблицы по ключу
     sort(table1.begin(), table1.end(), compareRows);
     sort(table2.begin(), table2.end(), compareRows);
 
     int i = 0, j = 0;
 
     while (i < table1.size() && j < table2.size()) {
-       // cout << "Сравниваем: " << table1[i].key << " и " << table2[j].key << endl;
 
         if (table1[i].key == table2[j].key) {
-         //   cout << "Найдено совпадение!" << endl;
 
             vector<string> joinedRow;
-
-            
-            for (const auto& val : table1[i].values) {
-                joinedRow.push_back(val);
+            for (int idx = 0; idx < table1[i].values.size(); idx++) {
+                joinedRow.push_back(table1[i].values[idx]);
             }
-
-            
-            for (size_t k = 1; k < table2[j].values.size(); k++) {
+            for (int k = 1; k < table2[j].values.size(); k++) {
                 joinedRow.push_back(table2[j].values[k]);
             }
 
@@ -103,13 +103,13 @@ vector<vector<string>> mergeJoin(vector<TableRow>& table1, vector<TableRow>& tab
 }
 
 // Функция вывода результата
-void printResult(const vector<vector<string>>& result, const string& outputFile = "") {
+void printResult(vector<vector<string>> result, string outputFile) {
     if (outputFile.empty()) {
         // Вывод на экран
-        for (const auto& row : result) {
-            for (size_t i = 0; i < row.size(); i++) {
-                cout << row[i];
-                if (i < row.size() - 1) {
+        for (int i = 0; i < result.size(); i++) {
+            for (int j = 0; j < result[i].size(); j++) {
+                cout << result[i][j];
+                if (j < result[i].size() - 1) {
                     cout << ";";
                 }
             }
@@ -119,10 +119,10 @@ void printResult(const vector<vector<string>>& result, const string& outputFile 
     else {
         // Вывод в файл
         ofstream file(outputFile);
-        for (const auto& row : result) {
-            for (size_t i = 0; i < row.size(); i++) {
-                file << row[i];
-                if (i < row.size() - 1) {
+        for (int i = 0; i < result.size(); i++) {
+            for (int j = 0; j < result[i].size(); j++) {
+                file << result[i][j];
+                if (j < result[i].size() - 1) {
                     file << ";";
                 }
             }
@@ -132,57 +132,106 @@ void printResult(const vector<vector<string>>& result, const string& outputFile 
     }
 }
 
+// Пункты меню
+vector<string> mainMenu = {
+    "в файл result.txt",
+    "на экран"
+};
+
+// Отображение меню с возможностью выбора пунктов 
+void showMenu(const vector<string>& items, int selected, const string& header = "") {
+    system("cls"); // очистка экрана
+    if (!header.empty()) cout << header << "\n\n"; // вывод заголовка меню если он задан
+
+    // Инструкции по управлению
+    cout << "Используйте стрелки" <<COLOR_GREEN<< " ВВЕРХ / ВНИЗ" << COLOR_RESET << " для выбора | " << COLOR_GREEN << "ENTER" << COLOR_RESET << " - подтвердить.\n\n" << endl;
+
+    for (int i = 0; i < items.size(); i++) {  // Вывод всех пунктов меню
+        if (i == selected) {// Подсветка выбранного пункта
+            cout << COLOR_GREEN << "-> " << items[i] << COLOR_RESET << endl;
+        }
+        else {
+            cout << "   " << items[i] << endl;
+        }
+    }
+}
+
+// Работа с навигацией по меню с помощью стрелочек
+int arrowMenu(const vector<string>& items, const string& header) {
+    int selected = 0; // Индекс выбранного пункта
+    while (true) {
+        showMenu(items, selected, header);
+        int key = _getch();// Ожидание ввода пользователя
+        if (key == 224) { // Обработка специальных клавиш
+            key = _getch();
+            if (key == 72) { // Вверх
+                selected = (selected == 0) ? items.size() - 1 : selected - 1;
+            }
+            else if (key == 80) { // Вниз
+                selected = (selected == items.size() - 1) ? 0 : selected + 1;
+            }
+        }
+        else if (key == 13) { // Enter
+            return selected;
+        }
+        else if (key == 27) { // ESC
+            return -1;
+        }
+    }
+}
+
 int main() {
-    setlocale(LC_ALL, "Ru");
-    SetConsoleOutputCP(1251);
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
+   //setlocale(LC_ALL, "Russian");
+   SetConsoleOutputCP(1251);
+   SetConsoleCP(1251);
     string table1File = "table1.txt";
     string table2File = "table2.txt";
     string outputFile = "result.txt";
     int keyColumn1 = 0;
     int keyColumn2 = 0;
 
-    cout << "Начинаем соединение таблиц..." << endl;
+    cout << "Начало соединения таблиц..." << endl<<endl;
 
     vector<TableRow> table1 = readTable(table1File, keyColumn1);
     vector<TableRow> table2 = readTable(table2File, keyColumn2);
 
     if (table1.empty() || table2.empty()) {
-        cout << "Одна из таблиц пустая, соединение невозможно" << endl;
+        cout << COLOR_RED << "Одна из таблиц пустая, соединение невозможно"<<COLOR_RESET << endl;
+        system("pause");
         return 1;
     }
 
     vector<vector<string>> result = mergeJoin(table1, table2);
-    cout << "Найдено " << result.size() << " совпадений" << endl;
-  //  printResult(result, outputFile);
-    cout <<endl<< "Куда вывести результат?" << endl;
-    cout << "1 - в файл result.txt" << endl;
-    cout << "2 - на экран" << endl;
-    int choice;
-    cin >> choice;
+    cout <<endl<< COLOR_GREEN<< "Найдено "  << result.size()  << " совпадений!" << COLOR_RESET << endl<<endl;
+    system("pause");
 
-    if (choice == 1) {
+    // Используем меню для выбора вывода
+    int choice = arrowMenu(mainMenu, "Куда вывести результат?");
+
+    if (choice == 0) {
         printResult(result, "result.txt");
-        cout << "Результат сохранен в result.txt" << endl;
+        cout <<endl<< "Результат сохранен в "<<COLOR_GREEN<< "result.txt"<<COLOR_RESET << endl;
+        system("pause");
     }
-    else {
+    else if (choice == 1) {
+        cout << endl<<"Объединенная таблица:"<<endl<<endl;
         printResult(result, "");
-        cout <<endl<< "Хотите сохранить результат в файл?" << endl;
-        cout << "1 - да" << endl;
-        cout << "2 - нет" << endl;
-        int saveChoice;
-        cin >> saveChoice;
-
-        if (saveChoice == 1) {
+        cout << endl;
+        system("pause");
+        // Меню для сохранения после показа на экран
+        vector<string> saveMenu = { "да", "нет" };
+        int saveChoice = arrowMenu(saveMenu, "Хотите сохранить результат в файл?");
+        cout << endl;
+        if (saveChoice == 0) {
             printResult(result, "result.txt");
-            cout <<endl<< "Результат сохранен в result.txt" << endl;
+            cout <<endl<< "Результат сохранен в " <<COLOR_GREEN<< "result.txt"<<COLOR_RESET << endl<<endl;
+            system("pause");
         }
         else {
-            cout <<endl<< "Данные не сохранены в файл" << endl;
+            cout <<endl<<  "Данные"<<COLOR_RED << " НЕ " << COLOR_RESET<< "сохранены в файл." << endl<<endl;
+            system("pause");
         }
     }
-    return 0;
 
+    return 0;
 }

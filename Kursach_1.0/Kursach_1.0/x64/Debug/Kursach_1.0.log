@@ -1,2 +1,3 @@
 ﻿  Kursach_1.0.cpp
+C:\Users\alisa\Desktop\Учеба\4 курс\пяву\Kursach_1.0\Kursach_1.0.cpp(168,44): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
   Kursach_1.0.vcxproj -> C:\Users\alisa\Desktop\Учеба\4 курс\пяву\Kursach_1.0\x64\Debug\Kursach_1.0.exe
