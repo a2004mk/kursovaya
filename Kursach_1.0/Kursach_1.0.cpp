@@ -189,8 +189,15 @@ int main() {
     string outputFile = "result.txt";
     int keyColumn1 = 0;
     int keyColumn2 = 0;
-
-    cout << "Начало соединения таблиц..." << endl<<endl;
+    cout << "Номер ключевого столбца первой таблицы: ";
+    cin >> keyColumn1;
+    cout<< "Номер ключевого столбца второй таблицы: ";
+    cin >> keyColumn2;
+    if (keyColumn1 != 0 || keyColumn2 != 0) {
+        if (keyColumn1 != 0) keyColumn1 -= 1;
+        if (keyColumn2 != 0) keyColumn2 -= 1;
+    }
+    cout <<endl<< "Начало соединения таблиц..." << endl<<endl;
 
     vector<TableRow> table1 = readTable(table1File, keyColumn1);
     vector<TableRow> table2 = readTable(table2File, keyColumn2);
