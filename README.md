@@ -31,3 +31,9 @@
 ```bash
 make
 ./program
+```
+### Прямая компиляция
+```bash
+g++ -std=c++11 -Wall -o program main.cpp
+./program
+```
