@@ -19,13 +19,13 @@
 
 using namespace std;
 
-// Структура для строки таблицы
+// Г‘ГІГ°ГіГЄГІГіГ°Г  Г¤Г«Гї Г±ГІГ°Г®ГЄГЁ ГІГ ГЎГ«ГЁГ¶Г»
 struct TableRow {
     vector<string> values;
     string key;
 };
 
-// Прототипы функций
+// ГЏГ°Г®ГІГ®ГІГЁГЇГ» ГґГіГ­ГЄГ¶ГЁГ©
 string ensureTxtExtension(const string& filename);
 string removeTxtExtension(const string& filename);
 vector<TableRow> readTable(string filename, int keyColumn);
