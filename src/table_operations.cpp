@@ -13,7 +13,7 @@
 // printResult
 
 
-// Проверка на расширение .txt и добавление .txt
+// ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г°Г Г±ГёГЁГ°ГҐГ­ГЁГҐ .txt ГЁ Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ .txt
 string ensureTxtExtension(const string& filename) {
     if (filename.length() >= 4 && filename.substr(filename.length() - 4) == ".txt") {
         return filename;
@@ -21,7 +21,7 @@ string ensureTxtExtension(const string& filename) {
     return filename + ".txt";
 }
 
-// Функция для удаления расширения .txt
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї ГіГ¤Г Г«ГҐГ­ГЁГї Г°Г Г±ГёГЁГ°ГҐГ­ГЁГї .txt
 string removeTxtExtension(const string& filename) {
     if (filename.length() >= 4 && filename.substr(filename.length() - 4) == ".txt") {
         return filename.substr(0, filename.length() - 4);
@@ -29,13 +29,13 @@ string removeTxtExtension(const string& filename) {
     return filename;
 }
 
-// Функция чтения таблицы из txt файла
+// Г”ГіГ­ГЄГ¶ГЁГї Г·ГІГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» ГЁГ§ txt ГґГ Г©Г«Г 
 vector<TableRow> readTable(string filename, int keyColumn) {
     vector<TableRow> table;
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cout << COLOR_RED << "Ошибка открытия файла: " << filename << COLOR_RESET << endl;
+        cout << COLOR_RED << "ГЋГёГЁГЎГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г : " << filename << COLOR_RESET << endl;
         return table;
     }
 
@@ -58,7 +58,7 @@ vector<TableRow> readTable(string filename, int keyColumn) {
             row.key = row.values[keyColumn];
         }
         else {
-            cout << "Предупреждение: в строке " << COLOR_GREEN << lineNum << COLOR_RESET << " нет колонки " << COLOR_GREEN << keyColumn << COLOR_RESET << endl;
+            cout << "ГЏГ°ГҐГ¤ГіГЇГ°ГҐГ¦Г¤ГҐГ­ГЁГҐ: Гў Г±ГІГ°Г®ГЄГҐ " << COLOR_GREEN << lineNum << COLOR_RESET << " Г­ГҐГІ ГЄГ®Г«Г®Г­ГЄГЁ " << COLOR_GREEN << keyColumn << COLOR_RESET << endl;
             row.key = "";
         }
 
@@ -66,11 +66,11 @@ vector<TableRow> readTable(string filename, int keyColumn) {
     }
 
     file.close();
-    cout << "Прочитано " << COLOR_GREEN << table.size() << COLOR_RESET << " строк из " << COLOR_GREEN << filename << COLOR_RESET << endl;
+    cout << "ГЏГ°Г®Г·ГЁГІГ Г­Г® " << COLOR_GREEN << table.size() << COLOR_RESET << " Г±ГІГ°Г®ГЄ ГЁГ§ " << COLOR_GREEN << filename << COLOR_RESET << endl;
     return table;
 }
 
-// Функция для определения типа данных колонки
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГї ГІГЁГЇГ  Г¤Г Г­Г­Г»Гµ ГЄГ®Г«Г®Г­ГЄГЁ
 string getColumnType(const vector<TableRow>& table, int columnIndex) {
     if (table.empty() || columnIndex >= table[0].values.size()) {
         return "unknown";
@@ -85,7 +85,7 @@ string getColumnType(const vector<TableRow>& table, int columnIndex) {
             bool hasDot = false;
             string value = row.values[columnIndex];
 
-            // Проверяем, является ли значение числом
+            // ГЏГ°Г®ГўГҐГ°ГїГҐГ¬, ГїГўГ«ГїГҐГІГ±Гї Г«ГЁ Г§Г­Г Г·ГҐГ­ГЁГҐ Г·ГЁГ±Г«Г®Г¬
             for (char c : value) {
                 unsigned char uc = static_cast<unsigned char>(c);
                 if (!isdigit(uc) && c != '.' && c != '-' && c != ',') {
@@ -110,7 +110,7 @@ string getColumnType(const vector<TableRow>& table, int columnIndex) {
     return isNumeric ? "numeric" : "text";
 }
 
-// Функция для разделения строк на колонки
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г°Г Г§Г¤ГҐГ«ГҐГ­ГЁГї Г±ГІГ°Г®ГЄ Г­Г  ГЄГ®Г«Г®Г­ГЄГЁ
 vector<string> splitLine(const string& line) {
     vector<string> columns;
     stringstream ss(line);
@@ -121,11 +121,11 @@ vector<string> splitLine(const string& line) {
     return columns;
 }
 
-// Функция вывода отформатированной таблицы на консоль
+// Г”ГіГ­ГЄГ¶ГЁГї ГўГ»ГўГ®Г¤Г  Г®ГІГґГ®Г°Г¬Г ГІГЁГ°Г®ГўГ Г­Г­Г®Г© ГІГ ГЎГ«ГЁГ¶Г» Г­Г  ГЄГ®Г­Г±Г®Г«Гј
 void printBeautifulTable(const vector<vector<string>>& data) {
     if (data.empty()) return;
 
-    //  максимальные ширины колонок
+    //  Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г»ГҐ ГёГЁГ°ГЁГ­Г» ГЄГ®Г«Г®Г­Г®ГЄ
     vector<int> colWidths(data[0].size(), 0);
     for (const auto& row : data) {
         for (int i = 0; i < row.size() && i < colWidths.size(); i++) {
@@ -133,7 +133,7 @@ void printBeautifulTable(const vector<vector<string>>& data) {
         }
     }
 
-    // Вывод верхней границы
+    // Г‚Г»ГўГ®Г¤ ГўГҐГ°ГµГ­ГҐГ© ГЈГ°Г Г­ГЁГ¶Г»
     cout << "+";
     for (int width : colWidths) {
         for (int j = 0; j < width + 2; j++) cout << "-";
@@ -141,7 +141,7 @@ void printBeautifulTable(const vector<vector<string>>& data) {
     }
     cout << endl;
 
-    // Вывод данных
+    // Г‚Г»ГўГ®Г¤ Г¤Г Г­Г­Г»Гµ
     for (const auto& row : data) {
         cout << "|";
         for (int i = 0; i < row.size() && i < colWidths.size(); i++) {
@@ -151,7 +151,7 @@ void printBeautifulTable(const vector<vector<string>>& data) {
         }
         cout << endl;
 
-        // Разделитель между строками 
+        // ГђГ Г§Г¤ГҐГ«ГЁГІГҐГ«Гј Г¬ГҐГ¦Г¤Гі Г±ГІГ°Г®ГЄГ Г¬ГЁ 
         cout << "+";
         for (int width : colWidths) {
             for (int j = 0; j < width + 2; j++) cout << "-";
@@ -161,11 +161,11 @@ void printBeautifulTable(const vector<vector<string>>& data) {
     }
 }
 
-// Предпросмотр файла
+// ГЏГ°ГҐГ¤ГЇГ°Г®Г±Г¬Г®ГІГ° ГґГ Г©Г«Г 
 void previewFile(const string& filename, int linesToShow) {
     ifstream file(filename);
     if (!file.is_open()) {
-        cout << COLOR_RED << "Не удалось открыть файл: " << filename << COLOR_RESET << endl;
+        cout << COLOR_RED << "ГЌГҐ ГіГ¤Г Г«Г®Г±Гј Г®ГІГЄГ°Г»ГІГј ГґГ Г©Г«: " << filename << COLOR_RESET << endl;
         return;
     }
 
@@ -181,24 +181,24 @@ void previewFile(const string& filename, int linesToShow) {
     }
     file.close();
 
-    cout << endl << COLOR_GREEN << "=== Превью файла: " << filename << " ===" << COLOR_RESET << endl;
+    cout << endl << COLOR_GREEN << "=== ГЏГ°ГҐГўГјГѕ ГґГ Г©Г«Г : " << filename << " ===" << COLOR_RESET << endl;
 
     if (tableData.empty()) {
-        cout << COLOR_RED << "Файл пуст!" << COLOR_RESET << endl;
+        cout << COLOR_RED << "Г”Г Г©Г« ГЇГіГ±ГІ!" << COLOR_RESET << endl;
     }
     else {
         printBeautifulTable(tableData);
-        cout << COLOR_GRAY << "Показано первые " << tableData.size() << " строк" << COLOR_RESET << endl;
+        cout << COLOR_GRAY << "ГЏГ®ГЄГ Г§Г Г­Г® ГЇГҐГ°ГўГ»ГҐ " << tableData.size() << " Г±ГІГ°Г®ГЄ" << COLOR_RESET << endl;
     }
     cout << endl;
 }
 
-// Функция сравнения 
+// Г”ГіГ­ГЄГ¶ГЁГї Г±Г°Г ГўГ­ГҐГ­ГЁГї 
 bool compareRows(TableRow a, TableRow b) {
     return a.key < b.key;
 }
 
-// Функция соединения таблиц
+// Г”ГіГ­ГЄГ¶ГЁГї Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶
 vector<vector<string>> mergeJoin(vector<TableRow> table1, vector<TableRow> table2) {
     vector<vector<string>> result;
 
@@ -234,7 +234,7 @@ vector<vector<string>> mergeJoin(vector<TableRow> table1, vector<TableRow> table
     return result;
 }
 
-//Функция создания названия для объединенного файла
+//Г”ГіГ­ГЄГ¶ГЁГї Г±Г®Г§Г¤Г Г­ГЁГї Г­Г Г§ГўГ Г­ГЁГї Г¤Г«Гї Г®ГЎГєГҐГ¤ГЁГ­ГҐГ­Г­Г®ГЈГ® ГґГ Г©Г«Г 
 string generateOutputFilename(const string& file1, const string& file2) {
 
     string name1 = removeTxtExtension(file1);
@@ -252,20 +252,20 @@ string generateOutputFilename(const string& file1, const string& file2) {
     return outputFile;
 }
 
-// Функция вывода результата
+// Г”ГіГ­ГЄГ¶ГЁГї ГўГ»ГўГ®Г¤Г  Г°ГҐГ§ГіГ«ГјГІГ ГІГ 
 void printResult(vector<vector<string>> result, string outputFile) {
     if (outputFile.empty()) {
 
-        cout << endl << COLOR_GREEN << "=== Объединенная таблица ===" << COLOR_RESET << endl;
+        cout << endl << COLOR_GREEN << "=== ГЋГЎГєГҐГ¤ГЁГ­ГҐГ­Г­Г Гї ГІГ ГЎГ«ГЁГ¶Г  ===" << COLOR_RESET << endl;
         if (result.empty()) {
-            cout << COLOR_RED << "Нет данных для отображения" << COLOR_RESET << endl;
+            cout << COLOR_RED << "ГЌГҐГІ Г¤Г Г­Г­Г»Гµ Г¤Г«Гї Г®ГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГї" << COLOR_RESET << endl;
         }
         else {
             printBeautifulTable(result);
         }
     }
     else {
-        // Вывод в файл (через ;)
+        // Г‚Г»ГўГ®Г¤ Гў ГґГ Г©Г« (Г·ГҐГ°ГҐГ§ ;)
         ofstream file(outputFile);
         for (int i = 0; i < result.size(); i++) {
             for (int j = 0; j < result[i].size(); j++) {
