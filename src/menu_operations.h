@@ -11,7 +11,7 @@
 
 using namespace std;
 
-// Прототипы функций меню
+// ГЏГ°Г®ГІГ®ГІГЁГЇГ» ГґГіГ­ГЄГ¶ГЁГ© Г¬ГҐГ­Гѕ
 int simpleMenu(const vector<string>& items, const string& header);
 string inputFilename(const string& prompt);
 void inputKeyColumns(int& keyColumn1, int& keyColumn2);
