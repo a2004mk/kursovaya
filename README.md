@@ -1,137 +1,65 @@
-# Программа соединения таблиц
+Welcome to PDCurses!
+====================
 
-Программа реализует алгоритм соединения двух таблиц по ключевому столбцу на основе алгоритма Merge Sort Join.
+PDCurses is an implementation of X/Open curses for multiple platforms.
+The latest version can be found at:
 
-## Задание от преподавателя:
+   https://pdcurses.org/
 
-Реализовать алгоритм соединения двух таблиц по указанным ключам на основе алгоритма Merge Sort Join.
-Входные данные для алгоритма: две таблицы с произвольным набором полей и произвольными типами данных для полей. Хранение таблиц необходимо организовать в виде текстовых файлов с разделителями в виде символа ";". (форматы .txt или .csv)
-Выходные данные - на экран или в текстовый файл с разделителями в виде символа ";" должна выводиться информация, сведенная из двух таблиц в одну по ключу соединения.
-Необходимо учесть разницу типов данных ключей соединения и ситуацию, когда поле с ключом соединения изначально не упорядочено.
-Язык программирования - C++, запрещается использовать любые СУБД и прочие средства работы с базами данных.
-
+For changes, see the [History] file. The main documentation is now in
+the [docs] directory.
 
 
-## Формальная постановка задачи
+Legal Stuff
+-----------
 
-Реализовать алгоритм соединения двух таблиц по указанным ключам на основе алгоритма Merge Sort Join. 
-- **Входные данные**: две таблицы с произвольным набором полей
-- **Формат хранения**: текстовые файлы с разделителями ";" (форматы .txt или .csv)
-- **Выходные данные**: на экран или в текстовый файл с разделителями ";"
-- **Язык программирования**: C++
+The core package is in the public domain, but small portions of PDCurses
+are subject to copyright under various licenses.  Each directory
+contains a README.md file, with a section titled "Distribution Status"
+which describes the status of the files in that directory.
 
-## Требования к системе
+If you use PDCurses in an application, an acknowledgement would be
+appreciated, but is not mandatory. If you make corrections or
+enhancements to PDCurses, please forward them to the current maintainer
+for the benefit of other users.
 
-- Компилятор C++ с поддержкой C++11
-- Операционная система: Windows
-
-## Сборка проекта
-
-### С помощью Makefile (рекомендуется)
-```bash
-make
-./program
-```
-Откройте терминал в папке с программой
-Введите команду: make
-Запустите: ./program
-
-### Прямая компиляция
-```bash
-g++ -std=c++11 -Wall -o program main.cpp
-./program
-```
+This software is provided AS IS with NO WARRANTY whatsoever.
 
 
-Пример таблицы 1 (table1.txt):
-``` bash
-1;Иван;Отдел_продаж
-2;Мария;Бухгалтерия  
-3;Петр;IT_отдел
-```
-Пример таблицы 2 (table2.txt):
-```bash
-1;50000;Менеджер
-2;45000;Бухгалтер
-3;60000;Программист
-```
+Ports
+-----
 
-### Пример результата:
-```bash
-1;Иван;Отдел_продаж;50000;Менеджер
-2;Мария;Бухгалтерия;45000;Бухгалтер  
-3;Петр;IT_отдел;60000;Программист
-```
+PDCurses has been ported to DOS, OS/2, Windows, X11 and SDL. A directory
+containing the port-specific source files exists for each of these
+platforms.
 
-### Важные заметки
+Build instructions are in the README.md file for each platform:
 
-1. Программа сама отсортирует таблицы перед соединением
+-  [DOS]
+-  [OS/2]
+-  [SDL 1.x]
+-  [SDL 2.x]
+-  [Windows]
+-  [X11]
 
-2. Поддерживаются русские символы в консоли
 
-3. Если таблицы/одна из таблиц пустые - программа сообщит об ошибке
+Distribution Status
+-------------------
 
-4. Если файлы не найдены - программа не запустится
+All files in this directory (not including subdirectories) are released
+to the public domain.
 
-### Если возникли проблемы
-1. Проверьте, что файлы table1.txt и table2.txt находятся в той же папке, что и программа
-2. Убедитесь, что в таблицах используется разделитель ; (точка с запятой)
-3. Проверьте, что номера столбцов с ключами верные
 
-### Файлы для тестов
-1. table1.txt, table2.txt - маленькие таблички
-2. btable.txt, btable2.txt - большие таблички
+Maintainer
+----------
 
-### Работа программы
+William McBrine <wmcbrine@gmail.com>
 
-### Ввод названий файлов пользователем
-
-<img width="576" height="188" alt="image" src="https://github.com/user-attachments/assets/bda9e447-9f37-4e0e-b136-ea9b55133aff" />
-
-### Вывод первых 10 строк введенных таблиц на экран
-
-<img width="1035" height="986" alt="image" src="https://github.com/user-attachments/assets/d09e52ef-306c-4c62-9d23-987aef7f88db" />
-
-### Выбор ключевых столбцов и объединение таблиц
-
-<img width="467" height="368" alt="image" src="https://github.com/user-attachments/assets/8981204b-882c-440e-96a7-6aa3ee130098" />
-
-### Вывод результата на экран
-
-<img width="1190" height="982" alt="image" src="https://github.com/user-attachments/assets/5f69f0b7-10c8-4474-93f2-efd4e7f61e17" />
-
-### Сохранение выведенной таблицы в файл
-
-<img width="425" height="152" alt="image" src="https://github.com/user-attachments/assets/3e636534-9852-426d-912e-2ad56ed8cbad" />
-
-### Полученный объединенный файл
-
-<img width="1325" height="699" alt="image" src="https://github.com/user-attachments/assets/ccfc868c-0ab4-4c53-a7b3-3208b8a8a141" />
-
-### Дальнейший выбор для пользователя после создания файла
-
-<img width="216" height="97" alt="image" src="https://github.com/user-attachments/assets/73840d19-9b84-489c-bdd0-afee7f3e56af" />
-
-### Ввод новых таблиц
-
-<img width="417" height="186" alt="image" src="https://github.com/user-attachments/assets/7c64cc9a-72ae-4a25-9c6a-17eb31760c7e" />
-
-### Отказ от вывода первых 10 строк таблиц на экран, объединение
-
-<img width="455" height="464" alt="image" src="https://github.com/user-attachments/assets/412548c0-cf24-48d8-9a1b-37bc91c862bc" />
-
-### Сохранение результата объединения в файл
-
-<img width="494" height="201" alt="image" src="https://github.com/user-attachments/assets/fec748a8-1f79-456a-8b2b-9a20b537bf0e" />
-
-### Просмотр первых 15 строк в файле с объединенной таблицей
-
-<img width="1043" height="825" alt="image" src="https://github.com/user-attachments/assets/b37d7fd5-0817-476c-8fd3-543c9d9619ed" />
-
-### Полученный файл
-
-<img width="730" height="417" alt="image" src="https://github.com/user-attachments/assets/2d7aa6e2-9830-45dc-84c7-8d35eedc9f53" />
-
-### Завершение работы программы
-
-<img width="411" height="130" alt="image" src="https://github.com/user-attachments/assets/5802a763-c0e4-4914-a60e-65c0ad92e1dc" />
+[History]: docs/HISTORY.md
+[docs]: docs/README.md
+[DOS]: dos/README.md
+[OS/2]: os2/README.md
+[SDL 1.x]: sdl1/README.md
+[SDL 2.x]: sdl2/README.md
+[Windows]: wincon/README.md
+[X11]: x11/README.md
