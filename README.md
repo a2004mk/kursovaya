@@ -83,41 +83,55 @@ g++ -std=c++11 -Wall -o program main.cpp
 2. btable.txt, btable2.txt - большие таблички
 
 ### Работа программы
-Ввод названий файлов пользователем
+
+### Ввод названий файлов пользователем
+
 <img width="576" height="188" alt="image" src="https://github.com/user-attachments/assets/bda9e447-9f37-4e0e-b136-ea9b55133aff" />
 
-Вывод первых 10 строк введенных таблиц на экран
+### Вывод первых 10 строк введенных таблиц на экран
+
 <img width="1035" height="986" alt="image" src="https://github.com/user-attachments/assets/d09e52ef-306c-4c62-9d23-987aef7f88db" />
 
-Выбор ключевых столбцов и объединение таблиц
+### Выбор ключевых столбцов и объединение таблиц
+
 <img width="467" height="368" alt="image" src="https://github.com/user-attachments/assets/8981204b-882c-440e-96a7-6aa3ee130098" />
 
-Вывод результата на экран
+### Вывод результата на экран
+
 <img width="1190" height="982" alt="image" src="https://github.com/user-attachments/assets/5f69f0b7-10c8-4474-93f2-efd4e7f61e17" />
 
-Сохранение выведенной таблицы в файл
+### Сохранение выведенной таблицы в файл
+
 <img width="425" height="152" alt="image" src="https://github.com/user-attachments/assets/3e636534-9852-426d-912e-2ad56ed8cbad" />
 
-Полученный объединенный файл
+### Полученный объединенный файл
+
 <img width="1325" height="699" alt="image" src="https://github.com/user-attachments/assets/ccfc868c-0ab4-4c53-a7b3-3208b8a8a141" />
 
-Дальнейший выбор для пользователя после создания файла
+### Дальнейший выбор для пользователя после создания файла
+
 <img width="216" height="97" alt="image" src="https://github.com/user-attachments/assets/73840d19-9b84-489c-bdd0-afee7f3e56af" />
 
-Ввод новых таблиц
+### Ввод новых таблиц
+
 <img width="417" height="186" alt="image" src="https://github.com/user-attachments/assets/7c64cc9a-72ae-4a25-9c6a-17eb31760c7e" />
 
-Отказ от вывода первых 10 строк таблиц на экран, объединение
+### Отказ от вывода первых 10 строк таблиц на экран, объединение
+
 <img width="455" height="464" alt="image" src="https://github.com/user-attachments/assets/412548c0-cf24-48d8-9a1b-37bc91c862bc" />
 
-Сохранение результата объединения в файл
+### Сохранение результата объединения в файл
+
 <img width="494" height="201" alt="image" src="https://github.com/user-attachments/assets/fec748a8-1f79-456a-8b2b-9a20b537bf0e" />
 
-Просмотр первых 15 строк в файле с объединенной таблицей
+### Просмотр первых 15 строк в файле с объединенной таблицей
+
 <img width="1043" height="825" alt="image" src="https://github.com/user-attachments/assets/b37d7fd5-0817-476c-8fd3-543c9d9619ed" />
 
-Полученный файл
+### Полученный файл
+
 <img width="730" height="417" alt="image" src="https://github.com/user-attachments/assets/2d7aa6e2-9830-45dc-84c7-8d35eedc9f53" />
 
-Завершение работы программы
+### Завершение работы программы
+
 <img width="411" height="130" alt="image" src="https://github.com/user-attachments/assets/5802a763-c0e4-4914-a60e-65c0ad92e1dc" />
